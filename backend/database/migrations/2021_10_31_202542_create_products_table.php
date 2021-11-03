@@ -17,10 +17,14 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('product');
-            $table->string('description');
+            $table->string('style');
+            $table->text('description');
             $table->decimal('auction_price');
             $table->timestamp('start', $precision = 0);
             $table->timestamp('end', $precision = 0);
+            $table->string('image_path1');
+            $table->string('image_path2');
+            $table->string('image_path3');
         });
     }
 

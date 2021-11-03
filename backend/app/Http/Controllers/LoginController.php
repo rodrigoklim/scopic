@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -23,7 +24,7 @@ class LoginController extends Controller
             $role = Role::find(2);
             $role->givePermissionTo('items list', 'item details');
 
-            $user = Auth::user();
+            $user = User::with(['autoBids'])->find(Auth::user()->id);
             $user->assignRole($role->id);
 
             $response = [
@@ -58,10 +59,10 @@ class LoginController extends Controller
                 'user' => $user,
                 'permissions' =>  $user->getPermissionsViaRoles()
             ];
-
             return $response;
         } else {
-            return false;
+            return 'false';
         }
+        
     }
 }

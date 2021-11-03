@@ -22,8 +22,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      
-      'axios', 'vuex', 'routeguard', 'moment'
+      'axios', 'vuex', 'routeguard', 'moment', 'swal'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -101,7 +100,7 @@ cfg.module.rules.push({
 
       // Quasar plugins
       plugins: [
-        'SessionStorage'
+        'SessionStorage', 'Notify'
       ]
     },
 

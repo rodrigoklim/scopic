@@ -2,18 +2,23 @@
   <div class="Login">
     <div class="row items-center" style="height: 93vh">
       <div class="col">
-        <div class="row justify-center items-center" style="height: 93vh">
-            <!-- <q-img src="~/assets/img/vemom_logo.svg" width="600px" /> -->
-        </div>
-        <div class="row q-ml-md items-baseline justify-end" style="height: 7vh">
-          <!-- <q-img src="~/assets/img/tecnoklim.svg" width="100px"/> <br> -->
+        <div class="row justify-center items-center" style="height: 100vh">
+            <div class="col">
+              <div class="row justify-center">
+                <q-img src="~/assets/logo-auction.svg" width="550px" />
+              </div>
+              <div class="row justify-center q-mt-md">
+                <div class="text-h2 handlee text-primary">Mr. Klim's Auction</div>
+              </div>
+            </div>
+
         </div>
       </div>
-      <div class="col bg-primary">
+      <div class="col bg-secondary">
         <div class="row q-ml-md items-center" style="height: 100vh">
           <q-card style="width: 400px">
             <q-card-section  style="background-color:#D0CFCF">
-              <div class="row text-h4 poppins items-center">
+              <div class="row text-h4 zen-regular items-center">
                 <q-icon name="locker" class="q-ml-lg" style="color:#7A7D7D"/>
                 login
               </div>
@@ -32,7 +37,8 @@
                 icon-right="double_arrow"
                 :loading="loading"
                 push
-                style="background-color: #250A6F; width: 200px; color: white"
+                color="primary"
+                style="width: 200px; color: white"
                 @click="login"
                 />
             </q-card-actions>
