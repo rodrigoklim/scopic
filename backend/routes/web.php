@@ -21,31 +21,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    event(new BidNotification('hello'));
+    $user1 = User::create([
+        'email' => 'user1@scopic',
+        'name' => 'User 1',
+        'password' => '1234'
+    ]);
 
-    BidNotification::dispatch('world');
-    // $product_id = 21; //rand(1, 50);
+    $user2 = User::create([
+        'email' => 'user2@scopic',
+        'name' => 'User 2',
+        'password' => '1234'
+    ]);
 
-    // $lastBid = Bid::where('product_id', $product_id)->orderBy('bid', 'desc')->first();
-
-    // if(!isset($lastBid)){
-    //     $product = Product::find($product_id);
-    //     $price = $product->auction_price;
-    // } else {
-    //     $price = $lastBid->bid;
-    // }
-
-    // $newBid = [
-    //     'user' => 2,//rand(11, 20),
-    //     'product' =>[
-    //         'id' => $product_id
-    //     ],
-    //     'bid' => $price
-    // ]; 
-
-    // $bid = new Bid();
-    // $bid->handleNewBid($newBid);
-    // $auto = Product::factory()->count(20)->create();
+    $auto = Product::factory()->count(20)->create();
 });
 Route::get('/autobid/{id}',[AutoBidController::class, 'destroy']);
 Route::get('/products',[ProductController::class, 'index']);
