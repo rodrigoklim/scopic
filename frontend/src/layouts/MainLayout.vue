@@ -20,7 +20,9 @@
             name="warning"
             size="md"
             color="warning"
-            v-if="parseFloat(wallet) <= parseFloat(alert)"
+            v-if="
+              parseFloat(wallet) <= parseFloat(alert) && parseFloat(wallet) > 0
+            "
           />
           <q-btn
             flat
@@ -131,7 +133,12 @@
 
 <script>
 import apiClient from "src/services/api";
-import { matMenu } from "@quasar/extras/material-icons";
+import {
+  matMenu,
+  matExitToApp,
+  matWarning,
+  matDelete,
+} from "@quasar/extras/material-icons";
 
 export default {
   name: "MainLayout",
@@ -143,12 +150,33 @@ export default {
       alert: parseFloat(this.$vuex.state.user.wallet.alert).toFixed(2),
     };
   },
-  mounted() {
+  created() {
     this.$nextTick(() => {
       this.drawerRight = false;
     });
+    window.Echo.channel("auction-notification").listen(
+      "BidNotification",
+      (e) => {
+        this.pusherUpdate(e.message);
+      }
+    );
+    this.$vuex.dispatch("freshList");
   },
   methods: {
+    pusherUpdate(val) {
+      if (val.product === this.$vuex.state.details.id) {
+        const url = "api/product/" + val.product;
+        apiClient.get(url).then((response) => {
+          this.$vuex.commit("seeDetails", response.data);
+        });
+      }
+      this.$q.notify({
+        position: "top-right",
+        avatar: val.product.bids[0].thumb,
+        message: val.product.bids[0].product + " has new bid!",
+        color: "secondary",
+      });
+    },
     logout() {
       const url = "api/logout";
       apiClient.post(url);
@@ -186,9 +214,7 @@ export default {
     },
   },
   watch: {
-    "$vuex.state.user.auto_bids": function (val) {
-      console.log(val);
-    },
+    "$vuex.state.user.auto_bids": function (val) {},
   },
 };
 </script>

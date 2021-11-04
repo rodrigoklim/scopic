@@ -86,27 +86,22 @@ import apiClient from "src/services/api";
 export default {
   name: "PageIndex",
   data() {
-    return {
-      products: [],
-    };
+    return {};
   },
   created() {
     this.matGavel = matGavel;
     this.matEvent = matEvent;
     this.matAttachMoney = matAttachMoney;
-    this.loadData();
   },
   methods: {
-    loadData() {
-      const url = "api/products";
-
-      apiClient.get(url).then((response) => {
-        this.products = response.data;
-      });
-    },
     details(item) {
-      this.$vuex.commit("seeDetails", item);
       this.$router.push("/product-details");
+      this.$vuex.commit("seeDetails", item);
+    },
+  },
+  computed: {
+    products() {
+      return this.$vuex.state.products ? this.$vuex.state.products : {};
     },
   },
 };

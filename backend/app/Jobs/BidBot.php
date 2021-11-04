@@ -22,7 +22,7 @@ class BidBot implements ShouldQueue
 
     public function handle()
     {
-        $product_id = rand(1, 5);
+        $product_id = 1;
 
         $lastBid = Bid::where('product_id', $product_id)->orderBy('bid', 'desc')->first();
 

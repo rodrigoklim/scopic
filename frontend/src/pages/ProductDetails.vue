@@ -84,7 +84,7 @@
                 </q-card-section>
                 <q-card-section>
                   <q-list bordered separator v-for="index in 3" :key="index">
-                    <q-item clickable v-ripple>
+                    <q-item clickable v-ripple v-if="bids[index]">
                       <q-item-section>
                         <q-item-label caption>
                           {{ bids[index].created_at | moment("from", "now") }}
@@ -95,7 +95,9 @@
                       </q-item-section>
                     </q-item>
                   </q-list>
-                  <div class="row q-mt-sm">
+                </q-card-section>
+                <q-card-section>
+                  <div class="row">
                     <q-checkbox
                       v-model="autobid"
                       @input="autobidCheckBox"
@@ -161,6 +163,11 @@
 
 <script>
 import apiClient from "src/services/api";
+import {
+  matEmojiEvents,
+  matHourglassBottom,
+  matGavel,
+} from "@quasar/extras/material-icons";
 export default {
   name: "ProductDetails",
   data() {
@@ -237,6 +244,7 @@ export default {
               this.$vuex.commit("autobids", response.data);
             }
           } else {
+            console.log(response.data);
             this.$vuex.commit("seeDetails", response.data);
           }
         })

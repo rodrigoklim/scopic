@@ -23,4 +23,9 @@ class ProductController extends Controller
                             ->where('end', '>', Carbon::now())
                             ->get();
     }
+
+    public function getProduct($id)
+    {
+        return Product::with(['bids', 'autoBids'])->find($id);
+    }
 }

@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     // product routes
     Route::get('/products',[ProductController::class, 'index']);
+    Route::get('/product/{id}',[ProductController::class, 'getProduct']);
 
     // Bid routes
     Route::post('/bid',[BidController::class, 'bid']);

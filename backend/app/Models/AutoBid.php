@@ -76,13 +76,13 @@ class AutoBid extends Model
         
         foreach($autobids as $autobid){
             if($autobid->user_id !== $data->user_id){
-                $this->checkWallet($autobid->user_id);
-
-                Bid::create([
-                    'user_id' => $autobid->user_id,
-                    'product_id' => $data->product_id,
-                    'bid' => floatval($bid) +1,
-                ]);
+                if($this->checkWallet($autobid->user_id)){
+                    Bid::create([
+                        'user_id' => $autobid->user_id,
+                        'product_id' => $data->product_id,
+                        'bid' => floatval($bid) +1,
+                    ]);
+                }
             }
         }
     }

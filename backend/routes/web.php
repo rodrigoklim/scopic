@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\BidNotification;
 use App\Http\Controllers\AutoBidController;
 use App\Http\Controllers\ProductController;
 use App\Models\AutoBid;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    event(new BidNotification('hello'));
+
+    BidNotification::dispatch('world');
     // $product_id = 21; //rand(1, 50);
 
     // $lastBid = Bid::where('product_id', $product_id)->orderBy('bid', 'desc')->first();
